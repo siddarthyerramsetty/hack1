@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillBridge - Sign Up</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+        }
+        :root {
+            --primary: #FF6B6B;        /* Bright coral red */
+            --primary-dark: #E74C3C;   /* Deeper red */
+            --secondary: #4ECDC4;      /* Turquoise */
+            --tertiary: #FFD166;       /* Sunny yellow */
+            --light: #FFF9F0;          /* Warm off-white */
+            --dark: #2D2A32;           /* Very dark purple-gray */
+            --gray: #95A5A6;           /* Cool gray */
+            --success: #7AE582;        /* Bright green */
+            --card-bg: rgba(255, 255, 255, 0.9);  /* Light card background */
+            --glass: rgba(45, 42, 50, 0.85);      /* Glass effect */
+            --shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.15);
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            --text-dark: #33373E;      /* Dark text color */
+        }
+        body {
+            background-color: var(--light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: linear-gradient(120deg, #fdfbfb 0%, #f9f7f7 100%);
+            min-height: 100vh;
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.5s;
+            z-index: -1;
+        }
+        .btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 15px 25px rgba(255, 107, 107, 0.4);
+        }
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--tertiary) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        .nav-links li {
+            margin-left: 30px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s;
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        .mobile-menu {
+            display: none;
+            cursor: pointer;
+            z-index: 101;
+        }
+        .bar {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-dark);
+            margin: 5px 0;
+            transition: all 0.3s;
+            border-radius: 3px;
+        }
+
+        /* Signup Section */
+        .signup-section {
+            padding: 120px 0 60px;
+            background: linear-gradient(135deg, #FFF9F0 0%, #FFE9E0 100%);
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        .signup-section::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: var(--tertiary);
+            opacity: 0.1;
+            top: -100px;
+            left: -100px;
+        }
+        .signup-section::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: var(--secondary);
+            opacity: 0.1;
+            bottom: -50px;
+            right: -50px;
+        }
+        .signup-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+        .signup-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+            animation: fadeIn 1s;
+        }
+        .signup-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .signup-header h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        .signup-header p {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+        .signup-form .form-group {
+            margin-bottom: 20px;
+        }
+        .signup-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+        .signup-form input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #E0E0E0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        .signup-form input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.2);
+            outline: none;
+        }
+        .signup-form .btn {
+            width: 100%;
+            margin-top: 15px;
+            font-size: 1rem;
+            padding: 14px;
+        }
+        .social-signup {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .social-signup p {
+            margin-bottom: 15px;
+            color: var(--gray);
+            position: relative;
+        }
+        .social-signup p::before, .social-signup p::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30%;
+            height: 1px;
+            background-color: #E0E0E0;
+        }
+        .social-signup p::before {
+            left: 0;
+        }
+        .social-signup p::after {
+            right: 0;
+        }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .social-icon:hover {
+            transform: translateY(-3px);
+        }
+        .facebook {
+            background-color: #3b5998;
+        }
+        .google {
+            background-color: #DB4437;
+        }
+        .apple {
+            background-color: #000;
+        }
+        .login-link {
+            text-align: center;
+            margin-top: 25px;
+        }
+        .login-link a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .login-link a:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .signup-card {
+                padding: 30px 20px;
+            }
+            .social-signup p::before, .social-signup p::after {
+                width: 25%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">Skill<span>Bridge</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#how-it-works">How It Works</a></li>
+                <li><a href="index.html#domains">Domains</a></li>
+                <li><a href="login.html" class="btn">Login</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Signup Section -->
+    <section class="signup-section">
+        <div class="container signup-container">
+            <div class="signup-card">
+                <div class="signup-header">
+                    <h2>Create Account</h2>
+                    <p>Join SkillBridge to start your learning journey</p>
+                </div>
+                <form class="signup-form">
+                    <div class="form-group">
+                        <label for="fullname">Full Name</label>
+                        <input type="text" id="fullname" placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" placeholder="Create a password">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Confirm Password</label>
+                        <input type="password" id="confirm-password" placeholder="Confirm your password">
+                    </div>
+                    <button type="submit" class="btn">Sign Up</button>
+                </form>
+                <div class="social-signup">
+                    <p>Or sign up with</p>
+                    <div class="social-icons">
+                        <div class="social-icon facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </div>
+                        <div class="social-icon google">
+                            <i class="fab fa-google"></i>
+                        </div>
+                        <div class="social-icon apple">
+                            <i class="fab fa-apple"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="login-link">
+                    Already have an account? <a href="login.html">Log in</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script type="module">
+
+
+        // Import the necessary Firebase modules from version 9.23.0
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+
+  // Your Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyBX-VqTsgU0wL1Bl3f44iraw9LOjtF7aE4",
+    authDomain: "login-21c99.firebaseapp.com",
+    projectId: "login-21c99",
+    storageBucket: "login-21c99.firebasestorage.app",
+    messagingSenderId: "903951003268",
+    appId: "1:903951003268:web:262456d503b3cd25bcdcd1"
+  };
+
+  // Initialize Firebase and get the authentication instance
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  // Select the signup form element
+  const signupForm = document.querySelector('.signup-form');
+
+  // Listen for the form submission event
+  signupForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    // Get form values
+    const fullName = document.getElementById('fullname').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirm-password').value;
+
+    // Simple client-side validation
+    if (password !== confirmPassword) {
+      alert("Passwords do not match.");
+      return;
+    }
+
+    // Create a new user with email and password
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Account creation successful.
+        const user = userCredential.user;
+        alert("Account created successfully! Welcome " + fullName);
+        // Optionally, redirect to the dashboard or login page
+        window.location.href = "dashboard.html";
+      })
+      .catch((error) => {
+        // Handle errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert("Error (" + errorCode + "): " + errorMessage);
+      });
+  });
+ 
+        // Mobile menu toggle
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenu.addEventListener('click', function() {
+            mobileMenu.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
